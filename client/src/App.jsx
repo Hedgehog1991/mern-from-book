@@ -5,10 +5,14 @@ import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import {Toaster} from "react-hot-toast";
+import {UserProvider} from "./context/UserContext.jsx";
+import PrivateRoute from "./components/PrivateRoute.jsx";
+import Profile from "./pages/Profile.jsx";
 
 export default function App(){
 
     return(
+        <UserProvider>
         <ChakraProvider>
     <BrowserRouter>
         <Toaster position ="bottom-right"/>
@@ -16,9 +20,15 @@ export default function App(){
         <Route path="/" element={<Home/>}/>
             <Route path="/signin" element={<SignIn/>}/>
             <Route path="/signup" element={<SignUp/>}/>
+
+            <Route element={<PrivateRoute/>}>
+            <Route path="/profile" element={<Profile/>}/>
+            </Route>
+
         </Routes>
     </BrowserRouter>
            </ChakraProvider>
+        </UserProvider>
     );
 }
 
